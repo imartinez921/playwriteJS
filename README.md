@@ -15,7 +15,7 @@ In addition, this project will include:
 -  instructions that show per point-and-click object upon hover
 -  light functionality when the fridge door is opened or closed
 - eraser for Whiteboard that can be used to erase and rearrange letters to a previous word
--  potentially showing the definition as a Nutrition Facts label of a bottle of # Andok's Litson Sauce (Filipino product)
+-  potentially showing the definition as a Nutrition Facts label of a bottle of Andok's Litson Sauce (Filipino product)
 - random quote about food generated as a wall sign
 
 
