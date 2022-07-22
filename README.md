@@ -40,21 +40,28 @@ https://wireframe.cc/pro/pp/6ff6c3277567799
 
 
 ### Implementation Timeline
-1.   Friday Afternoon & Weekend
-	- [ ] Getting to know Canvas and drawing the background (https://itch.io/game-assets/tag-kitchen)
-	- [ ] Constructing the letter magnets out of different fonts
-	- [ ] Randomizing their placement on the page
-	- [ ] Code for snapping letters together / highlight / glow when linked to create a word
-	- [ ] Understanding how to fetch from the dictionary API
-2.   Monday
-	- [ ] Fridge door open and close logic for dictionary query
-	- [ ] Word history showing up in script on the whiteboard
-	- [ ] Create inner fridge visual
-3.   Tuesday
-	- [ ] Postcards of recent word searches as images
-4.   Wednesday
-	- [ ] Game music / ambient sound
-5.   Thursday Morning
+#### 1.   Friday Afternoon & Weekend
+- [ ] Getting to know Canvas and drawing the background (https://itch.io/game-assets/tag-kitchen)
+
+- [ ] Constructing the letter magnets out of different fonts
+
+- [ ] Randomizing their placement on the page
+
+- [ ] Code for snapping letters together / highlight / glow when linked to create a word
+
+- [ ] Understanding how to fetch from the dictionary API
+#### 2.   Monday
+- [ ] Fridge door open and close logic for dictionary query
+
+- [ ] Word history showing up in script on the whiteboard
+
+- [ ] Create inner fridge visual
+#### 3.   Tuesday
+
+- [ ] Postcards of recent word searches as images
+#### 4.   Wednesday
+
+- [ ] Game music / ambient sound
 
 
 *** Title Credit: Kyle Ginzburg
