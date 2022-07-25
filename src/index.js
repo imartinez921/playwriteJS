@@ -16,13 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const background = new Image(); // 1149x860
     background.src = "../assets/images/top-fridge-door.png";
     background.onload = function(){     // Make sure the image is loaded first otherwise nothing will draw.
-        myCanvas.width = 1024;
-        myCanvas.height = 700;
-        ctx.drawImage(background,0,0,background.width,background.height,0,0,1024,700);
-        console.log('I am the image')
+        myCanvas.width = 1149;
+        myCanvas.height = 860;
+        ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
         
-        const letters1 = new Section (ctx, 100,0,300,500);
-        const letters2 = new Section (ctx, 0,0,300,500);
+        const letters1 = new Section (ctx, 150,50,500,300);
+        const letters2 = new Section (ctx, 150,500,500,300);
+        // const queryArea = new Section (ctx, 150,350,500,300);
+        
+
+        const lettersArr = [];
+        const alphabet = 'abcde';
+        // const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+        for (let i = 0; i < alphabet.length; i ++){            
+            const letter = new Letter (ctx, 100 + i*120, 100, lettersArr, alphabet);
+            console.log(lettersArr);
+        }
+
     } 
 
 })
