@@ -1,0 +1,19 @@
+// @import "./styles/css-reset.css";
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#canvas, #mycanvas {
+    margin: auto;
+    height: 25%;
+}
+
+h1 {
+    margin: auto;
+}
+
+footer {
+    margin: auto;
+}

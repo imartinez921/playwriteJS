@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
+    "babel-loader": "^8.2.5",
+    "core-js": "^3.23.5",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.53.0",
+    "sass-loader": "^13.0.2",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  },
+  "name": "thecoolerdictionary_js",
+  "description": "### Background Ever wanted walking past your fridge to stimulate your brain instead of your stomach? The Cooler Dictionary was created with that goal in mind. Suitable for both eaters and readers, the Cooler Dictionary allows the user to rearrange magnetic letters on the fridge to spell out a word.... What do you think happens when you open this kind of fridge? Trust me when I say it's more awesome than your typical heavy, dust-ridden dictionary.",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imartinez921/theCoolerDictionary_JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imartinez921/theCoolerDictionary_JS/issues"
+  },
+  "homepage": "https://github.com/imartinez921/theCoolerDictionary_JS#readme"
+}
