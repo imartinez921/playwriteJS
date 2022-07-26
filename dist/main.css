@@ -4,11 +4,12 @@
 body {
   display: flex;
   flex-direction: row;
+  margin: 0;
+  padding: 0;
 }
 
 #canvas, #mycanvas {
   margin: auto;
-  height: 25%;
 }
 
 h1 {

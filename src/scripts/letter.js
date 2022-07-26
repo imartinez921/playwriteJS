@@ -20,13 +20,13 @@ class Letter {
 
         // Get random rotation around center of letter
             this.ctx.save();
-            this.ctx.translate(15, -75);
+            this.ctx.translate(15, -75); // keeps most letters within range
             const dir = (Math.round(Math.random()) === 0) ? -1 : 1
-            this.ctx.rotate( (Math.PI / 180) * (Math.random() * 7) * dir);
+            this.ctx.rotate( (Math.PI / 180) * (Math.random() * 8) * dir);
 
         // Draw magnet shadow first
-            this.ctx.fillStyle = "black";
-            this.ctx.fillRect(this.x, this.y, this.width+6, this.height+6);
+            this.ctx.fillStyle = "grey";
+            this.ctx.fillRect(this.x, this.y, this.width+8, this.height+8);
 
         // Optional letter shadow if letter blocks
         //     this.ctx.shadowBlur = 20;
@@ -36,7 +36,7 @@ class Letter {
 
         // Draw letter square
             this.ctx.fillStyle = "white";
-            this.ctx.lineWidth = 5;
+            this.ctx.lineWidth = 8;
             this.ctx.strokeRect(this.x, this.y, this.width, this.height);
             this.ctx.fillRect(this.x, this.y, this.width, this.height);
 
@@ -52,8 +52,10 @@ class Letter {
     style (factor) { // This fn returns a random font for ctx.font, eg. ctx.font = "30px Arial";
         const pxDefault = 48; // I had originally calibrated a 48px font size to a box of 50 x 50
         const fonts = [
-            "arial", "serif", "times new roman", "Helvetica", "Courier", 
-            "Verdana", "comic sans"
+            "helvetica", "century gothic", "Courier", "perpetua",
+            "consolas", "comic sans", "baskerville", "calibri", "calisto",
+            "cambria", "candara", "trebuchet ms", "segoe script",
+            "lucida handwriting", "Script MT", 
         ]
         const selectedFont = fonts[Math.floor(Math.random() * fonts.length)];
         return pxDefault*factor + 'px ' + selectedFont;

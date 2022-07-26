@@ -32,21 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
 async function spawn(ctx) {
     const letters1 = new Section (ctx, 200,100,700,150); // rendered for testing
     const letters2 = new Section (ctx, 200,550,700,150); // rendered for testing
-    const queryArea = new Section (ctx, 200,350,700,150);
+    const queryArea = new Section (ctx, 200,350,700,100);
 
     // Spawn original letters
     const lettersArr = [];
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     for (let i = 0; i < alphabet.length/2; i++){ 
-        const x = randomX(letters1);          
-        const y = randomY(letters1);          
+        const x = randomX(letters1)+(50 * Math.random());          
+        const y = randomY(letters1)+(50 * Math.random());          
 
         const letter = new Letter (ctx, x, y, lettersArr, alphabet);
         myLetters.push(letter);
     }
     for (let i = 0; i < alphabet.length/2; i++){ 
-        const x = randomX(letters2)+50;          
-        const y = randomY(letters2)+50;          
+        const x = randomX(letters2)+(50 * Math.random());    // offset for fridge graphic       
+        const y = randomY(letters2)+(50 * Math.random());          
 
         const letter = new Letter (ctx, x, y, lettersArr, alphabet);
         myLetters.push(letter);
