@@ -4,8 +4,8 @@ import Letter from './scripts/letter';
 
 const myLetters = [];
 let selectedLetter = null;
-let currentShapeIdx = null;
-let is_dragging = false;
+let currentLetterIdx = null;
+let isDragging = false;
 
 let startX;
 let startY;
@@ -108,13 +108,13 @@ let mouseDown = function (event) {
         let letterObj = myLetters[i];
         if (letterObj.contains(startX, startY)) {
             console.log('yes');
-            currentShapeIdx = i;
-        } else {
-            console.log('no');
+            currentLetterIdx = i;
+            isDragging = true;
+            console.log(isDragging);
+            console.log(currentLetterIdx);
         }
     }
 }
-
 
 
 
