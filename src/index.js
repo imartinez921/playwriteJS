@@ -180,14 +180,17 @@ function hoverQuery() {
     ctx.lineTo(queryArea.x, queryArea.y + queryArea.height);     
     ctx.closePath();
 
+    let midX = queryArea.x + queryArea.width/2;
+    let midY = queryArea.y + queryArea.height/2;
+    let innerRad = 10;
+    let outerRad = 15;
+
     // Create fill gradient
-    let gradient = ctx.createLinearGradient(50, 50, 50, queryArea.height);
-    gradient.addColorStop(0, "red");
-    gradient.addColorStop(1, "#faf100");
-        
-    // Fill the path
-    ctx.strokeStyle = gradient;
-    ctx.stroke();
+    let gradient = ctx.createRadialGradient(midX, midY, innerRad, midX, midY, outerRad);
+    gradient.addColorStop(0, "#14389c");
+    gradient.addColorStop(1, "#C6CACD");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(queryArea.x, queryArea.y, queryArea.width, queryArea.height);
     ctx.restore();
 }
 
