@@ -25,13 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const background = new Image(); 
     background.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/top-fridge-door.png"; // 1149x860
-    background.onload = function(){  // Make sure the image is loaded first otherwise nothing will draw.
+    background.onload = function() {  // Make sure the image is loaded first otherwise nothing will draw.
         myCanvas.width = 1149;
         myCanvas.height = 860;
         ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
         spawn(ctx);
     }
-    get_offset();
+
     addCanvasEventListeners(myCanvas);
 })
 
@@ -58,20 +58,20 @@ async function spawn(ctx) {
         const letter = new Letter (ctx, x, y, lettersArr, alphabet);
         myLetters.push(letter);
     }
-    console.log(myLetters.sort(letter => letter.letter));
+    console.log(myLetters);
 }
 
-function get_offset() {
-    let canvas_offsets = canvas.getBoundingClientRect();
-    offsetX = canvas_offsets.left;
-    offsetY = canvas_offsets.top;
-}
+// function get_offset() {
+//     let canvas_offsets = canvas.getBoundingClientRect();
+//     offsetX = canvas_offsets.left;
+//     offsetY = canvas_offsets.top;
+// }
 
 function addCanvasEventListeners(canvas) {
     canvas.onmousedown = mouseDown;
-    // myCanvas.onmouseup = mouseUp;
-    // myCanvas.onmouseout = mouseOut;
-    // myCanvas.onmousemove = mouseMove;
+    canvas.onmouseup = mouseUp;
+    canvas.onmouseout = mouseOut;
+    canvas.onmousemove = mouseMove;
 }
 function randomX (sect) {
     let x = 0;
@@ -90,32 +90,36 @@ function randomY (sect) {
 }
 
 
-function drawLetters() {
-    ctx.clearRect(0,0,myCanvas.width, myCanvas.height)
-    for (let letter of myLetters) {
-        letter.draw();
-    }
-}
-
 let mouseDown = function (event) {
     event.preventDefault();
     
     startX = parseInt(event.offsetX);
     startY = parseInt(event.offsetY);
-    console.log(event);
 
     for (let i = 0; i < myLetters.length; i++) {
         let letterObj = myLetters[i];
         if (letterObj.contains(startX, startY)) {
-            console.log('yes');
             currentLetterIdx = i;
             isDragging = true;
-            console.log(isDragging);
-            console.log(currentLetterIdx);
         }
     }
 }
 
+let mouseUp = function (event) {
+    if (!isDragging) { // No action if we are not currently dragging
+        return;
+    } else {
+        event.preventDefault();
+        isDragging = false; // Else, we exit dragging mode
+    }
+}
 
-
+let mouseOut = function (event) {
+    if (!isDragging) {
+        return;
+    } else {
+        event.preventDefault();
+        isDragging = false;
+    }
+}
 
