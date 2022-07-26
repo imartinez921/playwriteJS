@@ -21,7 +21,7 @@ class Letter {
             this.ctx.font = this.font; // I had originally calibrated a 48px font size to a box of 50 x 50
 
         // Get random rotation around center of letter
-            this.rotation = this.rotate();
+            this.rotate();
             this.ctx.rotate(this.rotation);
 
         // Draw magnet shadow first
@@ -53,7 +53,7 @@ class Letter {
         this.ctx.save();
         this.ctx.translate(15, -75); // keeps most letters within range
         const dir = (Math.round(Math.random()) === 0) ? -1 : 1
-        return ((Math.PI / 180) * (Math.random() * 8) * dir);
+        this.rotation = ((Math.PI / 180) * (Math.random() * 8) * dir);
         }
 
     style (factor) { // This fn returns a random font for ctx.font, eg. ctx.font = "30px Arial";
