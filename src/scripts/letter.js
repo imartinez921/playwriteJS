@@ -4,7 +4,7 @@ class Letter {
         this.ctx = ctx;
         this.x = x;
         this.y = y;
-        this.width = 50;
+        this.width = 55;
         this.height = this.width;
         this.lettersArr = lettersArr;
         this.alphabet = alphabet;
@@ -19,13 +19,10 @@ class Letter {
             this.ctx.font = this.style(this.width/50); // I had originally calibrated a 48px font size to a box of 50 x 50
 
         // Get random rotation around center of letter
-            // this.ctx.save();
-            // this.ctx.translate(
-            //     (this.x + this.width/2), 
-            //     (this.y + this.height/2)
-            // ); 
-            // const dir = (Math.round(Math.random()) === 0) ? -1 : 1
-            // this.ctx.rotate( (Math.PI / 180) * (Math.floor(Math.random() * 35)) * dir);
+            this.ctx.save();
+            this.ctx.translate(15, -75);
+            const dir = (Math.round(Math.random()) === 0) ? -1 : 1
+            this.ctx.rotate( (Math.PI / 180) * (Math.random() * 7) * dir);
 
         // Draw magnet shadow first
             this.ctx.fillStyle = "black";
@@ -47,8 +44,8 @@ class Letter {
             this.ctx.fillStyle = "black";
             this.ctx.textAlign = "center";
             this.ctx.fillText(this.letter, this.x + this.width/2, this.y + this.height - this.height/5);
-            // this.ctx.restore();
-            console.log('THE LETTER IS POSTED HERE', this.x, this.y)
+            this.ctx.restore();
+            // console.log('THE LETTER IS POSTED HERE', this.x, this.y)
         }
     }
 

@@ -1,3 +1,20 @@
-body{display:flex;flex-direction:column}#canvas,#mycanvas{margin:auto;height:25%}h1{margin:auto}footer{margin:auto}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+body {
+  display: flex;
+  flex-direction: row;
+}
 
-/*# sourceMappingURL=main.css.map*/
+#canvas, #mycanvas {
+  margin: auto;
+  height: 25%;
+}
+
+h1 {
+  margin: auto;
+}
+
+footer {
+  margin: auto;
+}

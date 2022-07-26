@@ -19,19 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // animate();
 
     const background = new Image(); 
-    background.src = "../assets/images/top-fridge-door.png"; // 1149x860
+    background.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/top-fridge-door.png"; // 1149x860
     background.onload = function(){  // Make sure the image is loaded first otherwise nothing will draw.
         myCanvas.width = 1149;
         myCanvas.height = 860;
         ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
-        
-    const letters1 = new Section (ctx, 150,50,600,300); // rendered for testing
-    const letters2 = new Section (ctx, 150,500,600,300); // rendered for testing
-    // const queryArea = new Section (ctx, 150,350,500,300);
-        
+        spawn(ctx);
+        // addCanvasEventListeners();
+    }
+})
+
+async function spawn(ctx) {
+    const letters1 = new Section (ctx, 200,100,700,150); // rendered for testing
+    const letters2 = new Section (ctx, 200,550,700,150); // rendered for testing
+    const queryArea = new Section (ctx, 200,350,700,150);
+
     // Spawn original letters
     const lettersArr = [];
-    const alphabet = 'abcdefghijkl';
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     for (let i = 0; i < alphabet.length/2; i++){ 
         const x = randomX(letters1);          
         const y = randomY(letters1);          
@@ -40,22 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
         myLetters.push(letter);
     }
     for (let i = 0; i < alphabet.length/2; i++){ 
-        const x = randomX(letters2);          
-        const y = randomY(letters2);          
+        const x = randomX(letters2)+50;          
+        const y = randomY(letters2)+50;          
 
         const letter = new Letter (ctx, x, y, lettersArr, alphabet);
         myLetters.push(letter);
     }
     console.log(myLetters);
-    }
+}
 
-    // addCanvasEventListeners();
-
-})
 
 function randomX (sect) {
     let x = 0;
-    while (!sect.containsX(x)) {
+    while (!sect.containsX(x)){// && queryArea.containsY(y)) {
         x = sect.x + (Math.random() * sect.width);
     }
     return x;
@@ -63,7 +65,7 @@ function randomX (sect) {
 
 function randomY (sect) {
     let y = 0;
-    while (!sect.containsY(y)) {
+    while (!sect.containsY(y)){// && queryArea.containsY(y)) {
         y = sect.y + (Math.random() * sect.height) + 100; // slight offset
     }
     return y;
