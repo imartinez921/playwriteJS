@@ -84,7 +84,7 @@ function randomX (sect) {
 function randomY (sect) {
     let y = 0;
     while (!sect.containsY(y)){// && queryArea.containsY(y)) {
-        y = sect.y + (Math.random() * sect.height) + 100; // slight offset
+        y = sect.y + (Math.random() * sect.height); // slight offset
     }
     return y;
 }

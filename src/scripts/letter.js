@@ -10,7 +10,7 @@ class Letter {
         this.alphabet = alphabet;
         this.letter = this.pickLetter();
         this.font = this.style(this.width/50)
-        this.rotation = null;
+        // this.rotation = null;
 
         this.draw();
     }
