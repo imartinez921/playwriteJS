@@ -4,6 +4,10 @@ import Letter from './scripts/letter';
 
 const myLetters = [];
 let selectedLetter = null;
+let currentShapeIdx = null;
+let is_dragging = false;
+let startX;
+let startY;
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,8 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const ctx = myCanvas.getContext('2d')
 
-    // animate();
-
     const background = new Image(); 
     background.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/top-fridge-door.png"; // 1149x860
     background.onload = function(){  // Make sure the image is loaded first otherwise nothing will draw.
@@ -25,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         myCanvas.height = 860;
         ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
         spawn(ctx);
-        // addCanvasEventListeners();
+        addCanvasEventListeners();
     }
 })
 
@@ -71,51 +73,19 @@ function randomY (sect) {
     return y;
 }
 
-// function animate() { 
-//     ctx.save();
-//     c.clearRect(0,0,myCanvas.width, myCanvas.height)
-//     ctx.restore();
+
+
+
+function addCanvasEventListeners() {
+    myCanvas.onmousedown = mouseDown;
+    myCanvas.onmouseup = mouseUp;
+    myCanvas.onmouseout = mouseOut;
+    myCanvas.onmousemove = mouseMove;
+}
+
+
+// let onMouseDown = function (event) {
+//     event.preventDefault();
+//     console.log(event);
 // }
 
-
-
-// function addCanvasEventListeners() {
-//     myCanvas.addEventListeners("mousedown", onMouseDown);
-//     myCanvas.addEventListeners("mousemove", onMouseMove);
-// //     myCanvas.addEventListeners("mouseup", onMouseUp);
-// }
-
-
-// function onMouseDown (evt) {
-//     selectedLetter = getPressedLetter(evt);
-//     if (selectedLetter !== null) {
-//         const idx = myLetters.indexOf(selectedLetter);
-//         if (idx > -1) {
-//             myLetters.splice(idx,1);
-//             myLetters.push(selectedLetter);
-//         }
-//         selectedLetter.offset = {
-//             x:evt.x-selectedLetter.x,
-//             y:evt.y-selectedLetter.y,
-//         }
-//     }
-// }
-
-// function onMouseMove (evt) {
-//     selectedLetter = getPressedLetter(evt);
-//     if (selectedLetter !== null) {
-//         selectedLetter.offset = {
-//             x:evt.x-selectedLetter.x,
-//             y:evt.y-selectedLetter.y,
-//         }
-//     }
-// } 
-
-
-// function getPressedLetter(pos) {
-//     for (let i = 0; i < myLetters.length; i++) {
-//         const letterObj = myLetters[i];
-//         if (letterObj.contains(pos[0],pos[1])) return letterObj;
-//     }
-//     return null;
-// }

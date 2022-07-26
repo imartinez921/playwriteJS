@@ -9,6 +9,8 @@ class Letter {
         this.lettersArr = lettersArr;
         this.alphabet = alphabet;
         this.letter = this.pickLetter();
+        this.font = this.style(this.width/50)
+        this.rotation = null;
 
         this.draw();
     }
@@ -16,13 +18,11 @@ class Letter {
     draw () {
         // Get a remaining letter in a random font
         if (this.lettersArr.length < this.alphabet.length){
-            this.ctx.font = this.style(this.width/50); // I had originally calibrated a 48px font size to a box of 50 x 50
+            this.ctx.font = this.font; // I had originally calibrated a 48px font size to a box of 50 x 50
 
         // Get random rotation around center of letter
-            this.ctx.save();
-            this.ctx.translate(15, -75); // keeps most letters within range
-            const dir = (Math.round(Math.random()) === 0) ? -1 : 1
-            this.ctx.rotate( (Math.PI / 180) * (Math.random() * 8) * dir);
+        this.rotation = this.rotate();
+        this.ctx.rotate(this.rotation);
 
         // Draw magnet shadow first
             this.ctx.fillStyle = "grey";
@@ -48,6 +48,13 @@ class Letter {
             // console.log('THE LETTER IS POSTED HERE', this.x, this.y)
         }
     }
+
+    rotate () {
+        this.ctx.save();
+        this.ctx.translate(15, -75); // keeps most letters within range
+        const dir = (Math.round(Math.random()) === 0) ? -1 : 1
+        return ((Math.PI / 180) * (Math.random() * 8) * dir);
+        }
 
     style (factor) { // This fn returns a random font for ctx.font, eg. ctx.font = "30px Arial";
         const pxDefault = 48; // I had originally calibrated a 48px font size to a box of 50 x 50
