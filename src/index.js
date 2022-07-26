@@ -74,6 +74,12 @@ function randomY (sect) {
 }
 
 
+function drawLetters() {
+    ctx.clearRect(0,0,myCanvas.width, myCanvas.height)
+    for (let letter of myLetters) {
+        letter.draw();
+    }
+}
 
 
 function addCanvasEventListeners() {
