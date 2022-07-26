@@ -2,7 +2,7 @@ import Section from './scripts/section';
 import Letter from './scripts/letter';  
 
 let background = null;
-const myLetters = [];
+let myLetters = [];
 let selectedLetter = null;
 let currentLetterIdx = null;
 let isDragging = false;
@@ -112,6 +112,7 @@ let mouseDown = function (event) {
         if (letterObj.contains(startX, startY)) {
             currentLetterIdx = i;
             isDragging = true;
+            bringToFront();
         }
     }
 }
@@ -145,10 +146,9 @@ let mouseMove = function (event) {
         let dx = mouseX - startX;
         let dy = mouseY - startY;
         
-        let currentLetter = myLetters[currentLetterIdx];
-        currentLetter.x += dx;
-        currentLetter.y += dy;
-        
+        selectedLetter = myLetters[currentLetterIdx];
+        selectedLetter.x += dx;
+        selectedLetter.y += dy;
         
         drawLetters();
 
@@ -157,10 +157,17 @@ let mouseMove = function (event) {
     }
 }
 
-
 function drawLetters() {
     backgroundOnly();
+    // bringToFront();
     for (let letter of myLetters) {
         letter.draw();
     }
+}
+
+function bringToFront() {
+    let temp = myLetters[currentLetterIdx];
+    myLetters.splice(currentLetterIdx, 1);
+    myLetters.push(temp);
+    console.log(myLetters);
 }
