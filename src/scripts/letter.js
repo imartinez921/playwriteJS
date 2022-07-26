@@ -21,8 +21,8 @@ class Letter {
             this.ctx.font = this.font; // I had originally calibrated a 48px font size to a box of 50 x 50
 
         // Get random rotation around center of letter
-        this.rotation = this.rotate();
-        this.ctx.rotate(this.rotation);
+            this.rotation = this.rotate();
+            this.ctx.rotate(this.rotation);
 
         // Draw magnet shadow first
             this.ctx.fillStyle = "grey";
