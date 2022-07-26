@@ -6,11 +6,15 @@ let myLetters = [];
 let selectedLetter = null;
 let currentLetterIdx = null;
 let isDragging = false;
+let queryArea;
+let query = '';
 
 let ctx;
 let myCanvas;
 let startX;
 let startY;
+let mouseX;
+let mouseY;
 let offsetX;
 let offsetY;
 
@@ -32,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initialize () {
     background = new Image(); 
-    background.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/top-fridge-door.png"; // 1149x860
+    background.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/fridge_door.png"; // 1149x860
     background.onload = function() {  // Make sure the image is loaded first otherwise nothing will draw.
         myCanvas.width = 1149;
         myCanvas.height = 860;
@@ -50,7 +54,7 @@ function spawn(ctx) {
     // Set regions of frige doors
     const letters1 = new Section (ctx, 200,100,700,150); // rendered for testing
     const letters2 = new Section (ctx, 200,550,700,150); // rendered for testing
-    const queryArea = new Section (ctx, 200,350,700,100);
+    queryArea = new Section (ctx, 200,350,700,100);
 
     // Spawn original letters
     const lettersArr = [];
@@ -101,7 +105,7 @@ function randomY (sect) {
 }
 
 
-let mouseDown = function (event) {
+function mouseDown (event) {
     event.preventDefault();
     
     startX = parseInt(event.offsetX);
@@ -117,7 +121,7 @@ let mouseDown = function (event) {
     }
 }
 
-let mouseUp = function (event) {
+function mouseUp (event) {
     if (!isDragging) { // No action if we are not currently dragging
         return;
     } else {
@@ -126,7 +130,7 @@ let mouseUp = function (event) {
     }
 }
 
-let mouseOut = function (event) {
+function mouseOut (event) {
     if (!isDragging) {
         return;
     } else {
@@ -135,13 +139,15 @@ let mouseOut = function (event) {
     }
 }
 
-let mouseMove = function (event) {
+function mouseMove (event) {
+    mouseX = parseInt(event.offsetX)
+    mouseY = parseInt(event.offsetY)
+    
+    // if (insideQuery) hoverQuery();
+
     if (!isDragging) {
-        return;
     } else {
         event.preventDefault();
-        let mouseX = parseInt(event.offsetX)
-        let mouseY = parseInt(event.offsetY)
 
         let dx = mouseX - startX;
         let dy = mouseY - startY;
@@ -149,19 +155,53 @@ let mouseMove = function (event) {
         selectedLetter = myLetters[currentLetterIdx];
         selectedLetter.x += dx;
         selectedLetter.y += dy;
-        
-        drawLetters();
 
         startX = mouseX;
         startY = mouseY;
     }
+
+    drawLetters();
+}
+
+function insideQuery () {
+    if (queryArea.contains(mouseX,mouseY)) return true;
+    return false;
+}
+
+function hoverQuery() {
+// ctx.shadowBlur = 10;
+    // ctx.shadowColor = "black";
+    // ctx.strokeRect(this.x, this.y, this.width, this.height);
+
+    // Draw a path
+    ctx.beginPath();
+    ctx.moveTo(queryArea.x, queryArea.y);        
+    ctx.lineTo(queryArea.x + queryArea.width, queryArea.y); 
+    ctx.lineTo(queryArea.x + queryArea.width, queryArea.y + queryArea.height);     
+    ctx.lineTo(queryArea.x, queryArea.y + queryArea.height);     
+    ctx.closePath();
+
+    // Create fill gradient
+    let gradient = ctx.createLinearGradient(0, 0, 0, queryArea.height);
+    gradient.addColorStop(0, "#C6CACD");
+    gradient.addColorStop(1, "#faf100");
+        
+    // Fill the path
+    ctx.fillStyle = gradient;
+    ctx.fill();
 }
 
 function drawLetters() {
-    backgroundOnly();
-    // bringToFront();
+    if (isDragging) backgroundOnly();
+    if (insideQuery()) {
+        hoverQuery();
+    } else {
+        backgroundOnly();
+    }
+
     for (let letter of myLetters) {
         letter.draw();
+        console.log('just writing the letters')
     }
 }
 
