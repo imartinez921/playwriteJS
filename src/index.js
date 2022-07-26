@@ -6,8 +6,11 @@ const myLetters = [];
 let selectedLetter = null;
 let currentShapeIdx = null;
 let is_dragging = false;
+
 let startX;
 let startY;
+let offsetX;
+let offsetY;
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
         spawn(ctx);
     }
+    get_offset();
     addCanvasEventListeners(myCanvas);
 })
 
@@ -54,10 +58,21 @@ async function spawn(ctx) {
         const letter = new Letter (ctx, x, y, lettersArr, alphabet);
         myLetters.push(letter);
     }
-    console.log(myLetters);
+    console.log(myLetters.sort(letter => letter.letter));
 }
 
+function get_offset() {
+    let canvas_offsets = canvas.getBoundingClientRect();
+    offsetX = canvas_offsets.left;
+    offsetY = canvas_offsets.top;
+}
 
+function addCanvasEventListeners(canvas) {
+    canvas.onmousedown = mouseDown;
+    // myCanvas.onmouseup = mouseUp;
+    // myCanvas.onmouseout = mouseOut;
+    // myCanvas.onmousemove = mouseMove;
+}
 function randomX (sect) {
     let x = 0;
     while (!sect.containsX(x)){// && queryArea.containsY(y)) {
@@ -84,15 +99,23 @@ function drawLetters() {
 
 let mouseDown = function (event) {
     event.preventDefault();
+    
+    startX = parseInt(event.offsetX);
+    startY = parseInt(event.offsetY);
     console.log(event);
+
+    for (let i = 0; i < myLetters.length; i++) {
+        let letterObj = myLetters[i];
+        if (letterObj.contains(startX, startY)) {
+            console.log('yes');
+            currentShapeIdx = i;
+        } else {
+            console.log('no');
+        }
+    }
 }
 
-function addCanvasEventListeners(canvas) {
-    canvas.onmousedown = mouseDown;
-    // myCanvas.onmouseup = mouseUp;
-    // myCanvas.onmouseout = mouseOut;
-    // myCanvas.onmousemove = mouseMove;
-}
+
 
 
 
