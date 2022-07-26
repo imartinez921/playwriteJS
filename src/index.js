@@ -142,8 +142,6 @@ function mouseOut (event) {
 function mouseMove (event) {
     mouseX = parseInt(event.offsetX)
     mouseY = parseInt(event.offsetY)
-    
-    // if (insideQuery) hoverQuery();
 
     if (!isDragging) {
     } else {
@@ -174,6 +172,7 @@ function hoverQuery() {
     // ctx.strokeRect(this.x, this.y, this.width, this.height);
 
     // Draw a path
+    ctx.save();
     ctx.beginPath();
     ctx.moveTo(queryArea.x, queryArea.y);        
     ctx.lineTo(queryArea.x + queryArea.width, queryArea.y); 
@@ -182,13 +181,14 @@ function hoverQuery() {
     ctx.closePath();
 
     // Create fill gradient
-    let gradient = ctx.createLinearGradient(0, 0, 0, queryArea.height);
-    gradient.addColorStop(0, "#C6CACD");
+    let gradient = ctx.createLinearGradient(50, 50, 50, queryArea.height);
+    gradient.addColorStop(0, "red");
     gradient.addColorStop(1, "#faf100");
         
     // Fill the path
-    ctx.fillStyle = gradient;
-    ctx.fill();
+    ctx.strokeStyle = gradient;
+    ctx.stroke();
+    ctx.restore();
 }
 
 function drawLetters() {
@@ -201,7 +201,6 @@ function drawLetters() {
 
     for (let letter of myLetters) {
         letter.draw();
-        console.log('just writing the letters')
     }
 }
 
@@ -209,5 +208,4 @@ function bringToFront() {
     let temp = myLetters[currentLetterIdx];
     myLetters.splice(currentLetterIdx, 1);
     myLetters.push(temp);
-    console.log(myLetters);
 }
