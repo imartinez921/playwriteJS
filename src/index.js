@@ -1,12 +1,14 @@
 import Section from './scripts/section';
 import Letter from './scripts/letter';  
 
-
+let background = null;
 const myLetters = [];
 let selectedLetter = null;
 let currentLetterIdx = null;
 let isDragging = false;
 
+let ctx;
+let myCanvas;
 let startX;
 let startY;
 let offsetX;
@@ -17,25 +19,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log("hello world")
 
-    const myCanvas = document.getElementById('mycanvas');
+    myCanvas = document.getElementById('mycanvas');
     myCanvas.width = 1000;
     myCanvas.height = 1000;
     
-    const ctx = myCanvas.getContext('2d')
+    ctx = myCanvas.getContext('2d')
+   
+    initialize ();
+    addCanvasEventListeners(myCanvas);
+})
 
-    const background = new Image(); 
+
+function initialize () {
+    background = new Image(); 
     background.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/top-fridge-door.png"; // 1149x860
     background.onload = function() {  // Make sure the image is loaded first otherwise nothing will draw.
         myCanvas.width = 1149;
         myCanvas.height = 860;
         ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
+
         spawn(ctx);
     }
+}
 
-    addCanvasEventListeners(myCanvas);
-})
+function backgroundOnly () {
+    ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
+}
 
-async function spawn(ctx) {
+function spawn(ctx) {
     // Set regions of frige doors
     const letters1 = new Section (ctx, 200,100,700,150); // rendered for testing
     const letters2 = new Section (ctx, 200,550,700,150); // rendered for testing
@@ -61,11 +72,11 @@ async function spawn(ctx) {
     console.log(myLetters);
 }
 
-// function get_offset() {
-//     let canvas_offsets = canvas.getBoundingClientRect();
-//     offsetX = canvas_offsets.left;
-//     offsetY = canvas_offsets.top;
-// }
+function get_offset() {
+    let canvas_offsets = canvas.getBoundingClientRect();
+    offsetX = canvas_offsets.left;
+    offsetY = canvas_offsets.top;
+}
 
 function addCanvasEventListeners(canvas) {
     canvas.onmousedown = mouseDown;
@@ -123,3 +134,33 @@ let mouseOut = function (event) {
     }
 }
 
+let mouseMove = function (event) {
+    if (!isDragging) {
+        return;
+    } else {
+        event.preventDefault();
+        let mouseX = parseInt(event.offsetX)
+        let mouseY = parseInt(event.offsetY)
+
+        let dx = mouseX - startX;
+        let dy = mouseY - startY;
+        
+        let currentLetter = myLetters[currentLetterIdx];
+        currentLetter.x += dx;
+        currentLetter.y += dy;
+        
+        
+        drawLetters();
+
+        startX = mouseX;
+        startY = mouseY;
+    }
+}
+
+
+function drawLetters() {
+    backgroundOnly();
+    for (let letter of myLetters) {
+        letter.draw();
+    }
+}

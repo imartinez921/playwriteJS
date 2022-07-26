@@ -16,8 +16,8 @@ class Letter {
     }
     
     draw () {
+
         // Get a remaining letter in a random font
-        if (this.lettersArr.length < this.alphabet.length){
             this.ctx.font = this.font; // I had originally calibrated a 48px font size to a box of 50 x 50
 
         // Get random rotation around center of letter
@@ -45,8 +45,6 @@ class Letter {
             this.ctx.textAlign = "center";
             this.ctx.fillText(this.letter, this.x + this.width/2, this.y + this.height - this.height/5);
             this.ctx.restore();
-            // console.log('THE LETTER IS POSTED HERE', this.x, this.y)
-        }
     }
 
     // rotate () {
