@@ -27,11 +27,12 @@ document.addEventListener('DOMContentLoaded', () => {
         myCanvas.height = 860;
         ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
         spawn(ctx);
-        addCanvasEventListeners();
     }
+    addCanvasEventListeners(myCanvas);
 })
 
 async function spawn(ctx) {
+    // Set regions of frige doors
     const letters1 = new Section (ctx, 200,100,700,150); // rendered for testing
     const letters2 = new Section (ctx, 200,550,700,150); // rendered for testing
     const queryArea = new Section (ctx, 200,350,700,100);
@@ -81,17 +82,17 @@ function drawLetters() {
     }
 }
 
+let mouseDown = function (event) {
+    event.preventDefault();
+    console.log(event);
+}
 
-function addCanvasEventListeners() {
-    myCanvas.onmousedown = mouseDown;
-    myCanvas.onmouseup = mouseUp;
-    myCanvas.onmouseout = mouseOut;
-    myCanvas.onmousemove = mouseMove;
+function addCanvasEventListeners(canvas) {
+    canvas.onmousedown = mouseDown;
+    // myCanvas.onmouseup = mouseUp;
+    // myCanvas.onmouseout = mouseOut;
+    // myCanvas.onmousemove = mouseMove;
 }
 
 
-// let onMouseDown = function (event) {
-//     event.preventDefault();
-//     console.log(event);
-// }
 
