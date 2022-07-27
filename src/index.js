@@ -2,16 +2,18 @@ import Section from './scripts/section';
 import Letter from './scripts/letter';  
 
 let background = null;
+const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 const myLetters = [];
 let lettersArr = [];
 let selectedLetter = null;
 let currentLetterIdx = null;
 let isDragging = false;
 
+let queryString = '';
 let letters1;
 let letters2;
 let queryArea;
-let queryString = '';
+let handle;
 
 let ctx;
 let myCanvas;
@@ -59,7 +61,8 @@ function createSections (ctx) {
     // Set regions of frige doors
     letters1 = new Section (ctx, 200,100,800,150); // rendered for testing
     letters2 = new Section (ctx, 200,550,800,150); // rendered for testing
-    queryArea = new Section (ctx, 200,350,800,100);
+    queryArea = new Section (ctx, 200,350,800,100); 
+    handle = new Section (ctx, 70, 238, 40, 615)
 }
 function spawn(ctx) {
     createSections(ctx);
@@ -67,7 +70,6 @@ function spawn(ctx) {
 }
 
 function createLetters (ctx){
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     for (let i = 0; i < alphabet.length/2; i++){ 
         const x = randomX(letters1)+(50 * Math.random());          
         const y = randomY(letters1)+(50 * Math.random());          
@@ -83,6 +85,7 @@ function createLetters (ctx){
         myLetters.push(letter);
     }
     console.log(myLetters);
+    console.log(lettersArr);
 }
 
 function respawnLetter (ctx) {
@@ -92,29 +95,62 @@ function respawnLetter (ctx) {
         if (queryArea.contains(square.x, square.y)) {
             queryString += square.char;
 
-            let currentIdx = lettersArr.indexOf(square.char);
+            const currentIdx = lettersArr.indexOf(square.char);
             if (currentIdx !== -1) {
                 let removed = lettersArr.splice(currentIdx,1);
                 console.log('I spliced', removed);
             }
-            
-            // let spawnArea = (Math.round(Math.random()) === 0) ? letters1 : letters2;
-            
-            // const x = randomX(letters1)+(50 * Math.random());          
-            // const y = randomY(letters1)+(50 * Math.random()); 
-            // const letter = new Letter (ctx, x, y, lettersArr, alphabet);
-            // myLetters.push(letter);   
         }
     }
     console.log(queryString);
 
-    lettersArr = [];
+     // Print any missing letters
+    console.log('lettersArr before', lettersArr);
+    while (lettersArr.length < 26) {
+        createSingle(ctx);
+    }
+    console.log('myLetters', myLetters.sort());
+    console.log('lettersArr after', lettersArr.sort());
+   
+}
+
+function createSingle(ctx) {
+    let spawnArea = (Math.round(Math.random()) === 0) ? letters1 : letters2;
+            
+    const x = randomX(spawnArea)+(50 * Math.random());          
+    const y = randomY(spawnArea)+(50 * Math.random()); 
+    const letter = new Letter (ctx, x, y, lettersArr, alphabet);
+    myLetters.push(letter);
+    console.log('I printed', letter);
+}
+
+
+function removeMultiples(ctx) {
+// Delete any extra letters
+    const lettersCount = {};
     for (let square of myLetters) {
         if (!queryArea.contains(square.x, square.y)) {
-            lettersArr.push(square.char);
+            if (lettersCount[square.char]) {
+                lettersCount[square] += 1;
+                console.log('MULTIPLE', square.char);
+            } else {
+                lettersCount[square.char] = 1;
+            }
         }
-        console.log(lettersArr);
     }
+    console.log(lettersCount);
+    // for (let key of lettersCount) {
+    //     if (lettersCount[key] > 1) {
+    //         for (let i = 0; i < myLetters; i++) {
+    //             let currentLetter = myLetters[i];
+    //             if (currentLetter.char === lettersCount[key]) {
+    //                 let removed = myLetters.splice(i, 1);
+    //                 console.log('I spliced this Letter Obj:', removed);
+    //                 break;
+    //             }
+    //         }
+    //     }
+    // }
 
 }
 
@@ -170,7 +206,7 @@ function mouseUp (event) {
         event.preventDefault();
         isDragging = false; // Else, we exit dragging mode
     }
-    respawnLetter(ctx);
+    respawnLetter(ctx, lettersArr);
 }
 
 function mouseOut (event) {
@@ -209,6 +245,11 @@ function insideQuery () {
     return false;
 }
 
+function inHandle () {
+    if (handle.contains(mouseX,mouseY)) return true;
+    return false;
+}
+
 function hoverQuery() {
 
     ctx.save();
@@ -222,14 +263,32 @@ function hoverQuery() {
     ctx.restore();
 }
 
+function hoverHandle() {
+
+    ctx.save();
+
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = "yellow";
+    ctx.strokeStyle= "#C6CACD";
+    ctx.lineWidth = "1"
+    ctx.strokeRect(handle.x, handle.y, handle.width, handle.height);
+
+    ctx.restore();
+}
+
 function drawLetters() {
     if (isDragging) {
         backgroundOnly();
     }
+
     if (insideQuery()) {
         hoverQuery();
     } else {
         backgroundOnly();
+    }
+
+    if (inHandle()) {
+        hoverHandle();
     }
 
     for (let letter of myLetters) {
