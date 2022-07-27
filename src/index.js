@@ -6,6 +6,9 @@ let myLetters = [];
 let selectedLetter = null;
 let currentLetterIdx = null;
 let isDragging = false;
+
+let letters1;
+let letters2;
 let queryArea;
 let query = '';
 
@@ -17,6 +20,7 @@ let mouseX;
 let mouseY;
 let offsetX;
 let offsetY;
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,13 +54,18 @@ function backgroundOnly () {
     ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
 }
 
-function spawn(ctx) {
+function createSections (ctx) {
     // Set regions of frige doors
-    const letters1 = new Section (ctx, 200,100,700,150); // rendered for testing
-    const letters2 = new Section (ctx, 200,550,700,150); // rendered for testing
-    queryArea = new Section (ctx, 200,350,700,100);
+    letters1 = new Section (ctx, 200,100,800,150); // rendered for testing
+    letters2 = new Section (ctx, 200,550,800,150); // rendered for testing
+    queryArea = new Section (ctx, 200,350,800,100);
+}
+function spawn(ctx) {
+    createSections(ctx);
+    createLetters(ctx);
+}
 
-    // Spawn original letters
+function createLetters (ctx){
     const lettersArr = [];
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     for (let i = 0; i < alphabet.length/2; i++){ 
@@ -67,7 +76,7 @@ function spawn(ctx) {
         myLetters.push(letter);
     }
     for (let i = 0; i < alphabet.length/2; i++){ 
-        const x = randomX(letters2)+(50 * Math.random());    // offset for fridge graphic       
+        const x = randomX(letters2)+(50 * Math.random());    // offset for better placement       
         const y = randomY(letters2)+(50 * Math.random());          
 
         const letter = new Letter (ctx, x, y, lettersArr, alphabet);
@@ -90,7 +99,7 @@ function addCanvasEventListeners(canvas) {
 }
 function randomX (sect) {
     let x = 0;
-    while (!sect.containsX(x)){// && queryArea.containsY(y)) {
+    while (!sect.containsX(x)){
         x = sect.x + (Math.random() * sect.width);
     }
     return x;
@@ -98,8 +107,8 @@ function randomX (sect) {
 
 function randomY (sect) {
     let y = 0;
-    while (!sect.containsY(y)){// && queryArea.containsY(y)) {
-        y = sect.y + (Math.random() * sect.height); // slight offset
+    while (!sect.containsY(y)){
+        y = sect.y + (Math.random() * sect.height); // slight offset for more randomization
     }
     return y;
 }
@@ -170,7 +179,7 @@ function hoverQuery() {
 
     ctx.save();
 
-    ctx.shadowBlur = 80;
+    ctx.shadowBlur = 10;
     ctx.shadowColor = "yellow";
     ctx.strokeStyle= "#C6CACD";
     ctx.lineWidth = "1"
@@ -180,7 +189,9 @@ function hoverQuery() {
 }
 
 function drawLetters() {
-    if (isDragging) backgroundOnly();
+    if (isDragging) {
+        backgroundOnly();
+    }
     if (insideQuery()) {
         hoverQuery();
     } else {
