@@ -13,7 +13,6 @@ let queryString = '';
 let letters1;
 let letters2;
 let queryArea;
-let handle;
 
 let ctx;
 let myCanvas;
@@ -62,8 +61,7 @@ function createSections (ctx) {
     // Set regions of frige doors
     letters1 = new Section (ctx, 200,100,800,150); // rendered for testing
     letters2 = new Section (ctx, 200,550,800,150); // rendered for testing
-    queryArea = new Section (ctx, 200,350,800,100); 
-    handle = new Section (ctx, 70, 238, 40, 615)
+    queryArea = new Section (ctx, 200,350,800,100);
 }
 function spawn(ctx) {
     createSections(ctx);
@@ -249,11 +247,6 @@ function insideQuery () {
     return false;
 }
 
-function inHandle () {
-    if (handle.contains(mouseX,mouseY)) return true;
-    return false;
-}
-
 function hoverQuery() {
 
     ctx.save();
@@ -267,18 +260,6 @@ function hoverQuery() {
     ctx.restore();
 }
 
-function hoverHandle() {
-
-    ctx.save();
-
-    ctx.shadowBlur = 15;
-    ctx.shadowColor = "yellow";
-    ctx.strokeStyle= "#C6CACD";
-    ctx.lineWidth = "1"
-    ctx.strokeRect(handle.x, handle.y, handle.width, handle.height);
-
-    ctx.restore();
-}
 
 function drawLetters() {
     if (isDragging) {
@@ -291,9 +272,6 @@ function drawLetters() {
         backgroundOnly();
     }
 
-    if (inHandle()) {
-        hoverHandle();
-    }
 
     for (let letter of myLetters) {
         letter.draw();
