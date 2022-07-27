@@ -2,7 +2,8 @@ import Section from './scripts/section';
 import Letter from './scripts/letter';  
 
 let background = null;
-let myLetters = [];
+const myLetters = [];
+let lettersArr = [];
 let selectedLetter = null;
 let currentLetterIdx = null;
 let isDragging = false;
@@ -10,7 +11,7 @@ let isDragging = false;
 let letters1;
 let letters2;
 let queryArea;
-let query = '';
+let queryString = '';
 
 let ctx;
 let myCanvas;
@@ -66,7 +67,6 @@ function spawn(ctx) {
 }
 
 function createLetters (ctx){
-    const lettersArr = [];
     const alphabet = 'abcdefghijklmnopqrstuvwxyz';
     for (let i = 0; i < alphabet.length/2; i++){ 
         const x = randomX(letters1)+(50 * Math.random());          
@@ -83,6 +83,39 @@ function createLetters (ctx){
         myLetters.push(letter);
     }
     console.log(myLetters);
+}
+
+function respawnLetter (ctx) {
+    console.log('RESPAWN', myLetters)
+    queryString = '';
+    for (let square of myLetters) {
+        if (queryArea.contains(square.x, square.y)) {
+            queryString += square.char;
+
+            let currentIdx = lettersArr.indexOf(square.char);
+            if (currentIdx !== -1) {
+                let removed = lettersArr.splice(currentIdx,1);
+                console.log('I spliced', removed);
+            }
+            
+            // let spawnArea = (Math.round(Math.random()) === 0) ? letters1 : letters2;
+            
+            // const x = randomX(letters1)+(50 * Math.random());          
+            // const y = randomY(letters1)+(50 * Math.random()); 
+            // const letter = new Letter (ctx, x, y, lettersArr, alphabet);
+            // myLetters.push(letter);   
+        }
+    }
+    console.log(queryString);
+
+    lettersArr = [];
+    for (let square of myLetters) {
+        if (!queryArea.contains(square.x, square.y)) {
+            lettersArr.push(square.char);
+        }
+        console.log(lettersArr);
+    }
+
 }
 
 function get_offset() {
@@ -137,6 +170,7 @@ function mouseUp (event) {
         event.preventDefault();
         isDragging = false; // Else, we exit dragging mode
     }
+    respawnLetter(ctx);
 }
 
 function mouseOut (event) {
@@ -205,6 +239,7 @@ function drawLetters() {
 
 function bringToFront() {
     let temp = myLetters[currentLetterIdx];
+    selectedLetter = temp;
     myLetters.splice(currentLetterIdx, 1);
     myLetters.push(temp);
 }

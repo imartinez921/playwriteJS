@@ -8,7 +8,7 @@ class Letter {
         this.height = this.width;
         this.lettersArr = lettersArr;
         this.alphabet = alphabet;
-        this.letter = this.pickLetter();
+        this.char = this.pickLetter();
         this.font = this.style(this.width/50)
         // this.rotation = null;
 
@@ -43,7 +43,7 @@ class Letter {
         // Draw letter text
             this.ctx.fillStyle = "black";
             this.ctx.textAlign = "center";
-            this.ctx.fillText(this.letter, this.x + this.width/2, this.y + this.height - this.height/5);
+            this.ctx.fillText(this.char, this.x + this.width/2, this.y + this.height - this.height/5);
             this.ctx.restore();
     }
 
