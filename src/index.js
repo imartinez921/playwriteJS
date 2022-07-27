@@ -167,30 +167,15 @@ function insideQuery () {
 }
 
 function hoverQuery() {
-// ctx.shadowBlur = 10;
-    // ctx.shadowColor = "black";
-    // ctx.strokeRect(this.x, this.y, this.width, this.height);
 
-    // Draw a path
     ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(queryArea.x, queryArea.y);        
-    ctx.lineTo(queryArea.x + queryArea.width, queryArea.y); 
-    ctx.lineTo(queryArea.x + queryArea.width, queryArea.y + queryArea.height);     
-    ctx.lineTo(queryArea.x, queryArea.y + queryArea.height);     
-    ctx.closePath();
 
-    let midX = queryArea.x + queryArea.width/2;
-    let midY = queryArea.y + queryArea.height/2;
-    let innerRad = 10;
-    let outerRad = 15;
+    ctx.shadowBlur = 80;
+    ctx.shadowColor = "yellow";
+    ctx.strokeStyle= "#C6CACD";
+    ctx.lineWidth = "1"
+    ctx.strokeRect(queryArea.x, queryArea.y, queryArea.width, queryArea.height);
 
-    // Create fill gradient
-    let gradient = ctx.createRadialGradient(midX, midY, innerRad, midX, midY, outerRad);
-    gradient.addColorStop(0, "#14389c");
-    gradient.addColorStop(1, "#C6CACD");
-    ctx.fillStyle = gradient;
-    ctx.fillRect(queryArea.x, queryArea.y, queryArea.width, queryArea.height);
     ctx.restore();
 }
 
