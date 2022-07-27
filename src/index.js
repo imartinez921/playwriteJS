@@ -49,6 +49,7 @@ function initialize () {
         myCanvas.height = 860;
         ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
 
+        get_offset();
         spawn(ctx);
     }
 }
@@ -69,19 +70,25 @@ function spawn(ctx) {
     createLetters(ctx);
 }
 
+function get_offset() {
+    let canvas_offsets = myCanvas.getBoundingClientRect();
+    offsetX = canvas_offsets.left;
+    offsetY = canvas_offsets.top;
+}
+
 function createLetters (ctx){
     for (let i = 0; i < alphabet.length/2; i++){ 
         const x = randomX(letters1)+(50 * Math.random());          
         const y = randomY(letters1)+(50 * Math.random());          
 
-        const letter = new Letter (ctx, x, y, lettersArr, alphabet);
+        const letter = new Letter (ctx, x, y, offsetX, offsetY, lettersArr, alphabet);
         myLetters.push(letter);
     }
     for (let i = 0; i < alphabet.length/2; i++){ 
         const x = randomX(letters2)+(50 * Math.random());    // offset for better placement       
         const y = randomY(letters2)+(50 * Math.random());          
 
-        const letter = new Letter (ctx, x, y, lettersArr, alphabet);
+        const letter = new Letter (ctx, x, y, offsetX, offsetY, lettersArr, alphabet);
         myLetters.push(letter);
     }
     console.log(myLetters);
@@ -119,14 +126,14 @@ function createSingle(ctx) {
             
     const x = randomX(spawnArea)+(50 * Math.random());          
     const y = randomY(spawnArea)+(50 * Math.random()); 
-    const letter = new Letter (ctx, x, y, lettersArr, alphabet);
+    const letter = new Letter (ctx, x, y, offsetX, offsetY, lettersArr, alphabet);
     myLetters.push(letter);
     console.log('I printed', letter);
 }
 
 
 function removeMultiples(ctx) {
-// Delete any extra letters
+// Ensure only one of each letter outside Query Area
     const lettersCount = {};
     for (let square of myLetters) {
         if (!queryArea.contains(square.x, square.y)) {
@@ -154,11 +161,7 @@ function removeMultiples(ctx) {
 
 }
 
-function get_offset() {
-    let canvas_offsets = canvas.getBoundingClientRect();
-    offsetX = canvas_offsets.left;
-    offsetY = canvas_offsets.top;
-}
+
 
 function addCanvasEventListeners(canvas) {
     canvas.onmousedown = mouseDown;
@@ -207,6 +210,7 @@ function mouseUp (event) {
         isDragging = false; // Else, we exit dragging mode
     }
     respawnLetter(ctx, lettersArr);
+    removeMultiples(ctx);
 }
 
 function mouseOut (event) {
