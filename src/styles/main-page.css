@@ -1,0 +1,29 @@
+/* https://pics.clipartpng.com/midle/Kitchen_Set_PNG_Clipart-140.png */
+* {
+    margin: 0;
+    padding: 0;
+    }
+
+body {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    background-image: url("/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/kitchen-background.png");
+    /* background-repeat: repeat-y;
+    background-repeat: repeat-x; */
+}
+
+#canvas, #mycanvas {
+    margin: auto;
+    /* // height: 25%; */
+    /* display: none; */
+}
+
+h1 {
+    margin: auto;
+}
+
+footer {
+    margin: auto;
+}

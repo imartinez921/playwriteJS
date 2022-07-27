@@ -1,26 +1,2 @@
 // @import "./styles/css-reset.css";
-
-* {
-    margin: 0;
-    padding: 0;
-    }
-
-body {
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-    padding: 0;
-}
-
-#canvas, #mycanvas {
-    margin: auto;
-    // height: 25%;
-}
-
-h1 {
-    margin: auto;
-}
-
-footer {
-    margin: auto;
-}
+@import "./styles/main-page.css";

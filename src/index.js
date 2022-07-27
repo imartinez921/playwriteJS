@@ -125,6 +125,7 @@ function createSingle(ctx) {
     const x = randomX(spawnArea)+(50 * Math.random());          
     const y = randomY(spawnArea)+(50 * Math.random()); 
     const letter = new Letter (ctx, x, y, offsetX, offsetY, lettersArr, alphabet);
+
     myLetters.push(letter);
     console.log('I printed', letter);
 }
@@ -136,28 +137,42 @@ function removeMultiples(ctx) {
     for (let square of myLetters) {
         if (!queryArea.contains(square.x, square.y)) {
             if (lettersCount[square.char]) {
-                lettersCount[square] += 1;
-                console.log('MULTIPLE', square.char);
+                lettersCount[square.char] += 1;
+                console.log('MULTIPLE THIS', square.char);
+                
+                for (let i = 0; i < myLetters.length; i++) {
+                    if (myLetters[i].char === square.char) {
+                        myLetters.splice(i, 1);
+                    }
+                }
             } else {
                 lettersCount[square.char] = 1;
             }
         }
     }
     console.log(lettersCount);
-    // for (let key of lettersCount) {
-    //     if (lettersCount[key] > 1) {
-    //         for (let i = 0; i < myLetters; i++) {
-    //             let currentLetter = myLetters[i];
-    //             if (currentLetter.char === lettersCount[key]) {
-    //                 let removed = myLetters.splice(i, 1);
-    //                 console.log('I spliced this Letter Obj:', removed);
-    //                 break;
-    //             }
+    // console.log('SELECTED LETTER', selectedLetter);
+
+    // let countValues = Object.values(lettersCount);
+    // let multiples = [];
+    // while (countValues.some(value => value > 1 ) ) {
+    //     for (let key in lettersCount) {
+    //         if (lettersCount[key] > 1) {
+    //             console.log('I need to splice!!!');
+    //             multiples.push(key);
     //         }
     //     }
     // }
+    // console.log('I NEED TO SPLICE THESE', multiples);
+    // for (let i = 0; i < myLetters.length; i++) {
+    //     let currentLetter = myLetters[i];
+    //     if (currentLetter.char === key) {
+    //         let removed = myLetters.splice(i, 1);
+    //         console.log('I spliced this Letter Obj:', removed);
+    //         break;
+        }
+    
 
-}
 
 
 
@@ -186,6 +201,7 @@ function randomY (sect) {
 
 function mouseDown (event) {
     event.preventDefault();
+    console.log(event);
     
     startX = parseInt(event.offsetX);
     startY = parseInt(event.offsetY);
