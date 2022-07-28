@@ -4,10 +4,60 @@
     padding: 0;
     }
 
+:root {
+    --text: #5362F6; /* Blue */
+    --shadow: #E485F8; /* Pink */
+}
+
+.header {
+    text-align: center;
+    background-image: linear-gradient(to left, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    color: transparent;
+    font: bold 50px comic sans ms, helvetica;
+}
+
+#playful span {
+    color: var(--text);
+    text-shadow: 
+      6px 6px var(--shadow),
+      5.75px 5.75px var(--shadow),
+      5.5px 5.5px var(--shadow),
+      5.25px 5.25px var(--shadow),
+      5px 5px var(--shadow),
+      4.75px 4.75px var(--shadow),
+      4.5px 4.5px var(--shadow),
+      4.25px 4.25px var(--shadow),
+      4px 4px var(--shadow),
+      3.75px 3.75px var(--shadow),
+      3.5px 3.5px var(--shadow),
+      3.25px 3.25px var(--shadow),
+      3px 3px var(--shadow),
+      2.75px 2.75px var(--shadow),
+      2.5px 2.5px var(--shadow),
+      2.25px 2.25px var(--shadow),
+      2px 2px var(--shadow),
+      1.75px 1.75px var(--shadow),
+      1.5px 1.5px var(--shadow),
+      1.25px 1.25px var(--shadow),
+      1px 1px var(--shadow),
+      0.75px 0.75px var(--shadow),
+      0.5px 0.5px var(--shadow),
+      0.25px 0.25px var(--shadow);
+  }
+  
+  #playful span:nth-child(2n) {
+    --text: #ED625C;
+    --shadow: #F2A063;
+  }
+
+.spacer {
+    margin: auto;
+    height: 10px;
+}
+
 body {
-    display: flex;
-    flex-direction: row;
-    margin: 0;
+    margin: auto;
     padding: 0;
     background-image: url("/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/kitchen-background.png");
     /* background-repeat: repeat-y;

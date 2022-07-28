@@ -100,42 +100,6 @@ function createSingle(ctx, char) {
 }
 
 
-// function preventMultiples() {
-// // Ensure only one of each letter outside Query Area
-//     for (let square of myLetters) {
-//         if (!queryArea.contains(square.x, square.y)) {
-//             if (lettersCount[square.char]) {
-//                 lettersCount[square.char] += 1;
-//                 console.log('MULTIPLE THIS', square.char);
-//             } else {
-//                 lettersCount[square.char] = 1;
-//             }
-//         }
-//     }
-//     console.log('THIS IS LETTERSCOUNT', lettersCount);
-//     // console.log('SELECTED LETTER', selectedLetter);
-
-//     // let countValues = Object.values(lettersCount);
-//     // let multiples = [];
-//     // while (countValues.some(value => value > 1 ) ) {
-//     //     for (let key in lettersCount) {
-//     //         if (lettersCount[key] > 1) {
-//     //             console.log('I need to splice!!!');
-//     //             multiples.push(key);
-//     //         }
-//     //     }
-//     // }
-//     // console.log('I NEED TO SPLICE THESE', multiples);
-//     // for (let i = 0; i < myLetters.length; i++) {
-//     //     let currentLetter = myLetters[i];
-//     //     if (currentLetter.char === key) {
-//     //         let removed = myLetters.splice(i, 1);
-//     //         console.log('I spliced this Letter Obj:', removed);
-//     //         break;
-// }
-    
-
-
 function addCanvasEventListeners(canvas) {
     canvas.onmousedown = mouseDown;
     canvas.onmouseup = mouseUp;
