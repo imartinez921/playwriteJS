@@ -4,7 +4,8 @@ import Letter from './scripts/letter';
 let background = null;
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 const myLetters = [];
-let lettersArr = [];
+let queryArr = [];
+const lettersCount = {};
 let selectedLetter = null;
 let currentLetterIdx = null;
 let isDragging = false;
@@ -75,105 +76,64 @@ function get_offset() {
 }
 
 function createLetters (ctx){
-    for (let i = 0; i < alphabet.length/2; i++){ 
-        const x = randomX(letters1)+(50 * Math.random());          
-        const y = randomY(letters1)+(50 * Math.random());          
+    for (let i = 0; i < alphabet.length; i++){ 
+        let char = alphabet[i];
+        let spawnArea = (Math.round(Math.random()) === 0) ? letters1 : letters2;
 
-        const letter = new Letter (ctx, x, y, offsetX, offsetY, lettersArr, alphabet);
+        const x = randomX(spawnArea)+(50 * Math.random());          
+        const y = randomY(spawnArea)+(50 * Math.random());          
+
+        const letter = new Letter (ctx, x, y, char);
         myLetters.push(letter);
     }
-    for (let i = 0; i < alphabet.length/2; i++){ 
-        const x = randomX(letters2)+(50 * Math.random());    // offset for better placement       
-        const y = randomY(letters2)+(50 * Math.random());          
-
-        const letter = new Letter (ctx, x, y, offsetX, offsetY, lettersArr, alphabet);
-        myLetters.push(letter);
-    }
-    console.log(myLetters);
-    console.log(lettersArr);
 }
 
-function respawnLetter (ctx) {
-    console.log('RESPAWN', myLetters)
-    queryString = '';
-    for (let square of myLetters) {
-        if (queryArea.contains(square.x, square.y)) {
-            queryString += square.char;
-
-            const currentIdx = lettersArr.indexOf(square.char);
-            if (currentIdx !== -1) {
-                let removed = lettersArr.splice(currentIdx,1);
-                console.log('I spliced', removed);
-            }
-        }
-    }
-    console.log(queryString);
-
-     // Print any missing letters
-    console.log('lettersArr before', lettersArr);
-    while (lettersArr.length < 26) {
-        createSingle(ctx);
-    }
-    console.log('myLetters', myLetters.sort());
-    console.log('lettersArr after', lettersArr.sort());
-   
-}
-
-function createSingle(ctx) {
+function createSingle(ctx, char) {
     let spawnArea = (Math.round(Math.random()) === 0) ? letters1 : letters2;
             
     const x = randomX(spawnArea)+(50 * Math.random());          
     const y = randomY(spawnArea)+(50 * Math.random()); 
-    const letter = new Letter (ctx, x, y, offsetX, offsetY, lettersArr, alphabet);
+    const letter = new Letter (ctx, x, y, char);
 
     myLetters.push(letter);
     console.log('I printed', letter);
 }
 
 
-function removeMultiples(ctx) {
-// Ensure only one of each letter outside Query Area
-    const lettersCount = {};
-    for (let square of myLetters) {
-        if (!queryArea.contains(square.x, square.y)) {
-            if (lettersCount[square.char]) {
-                lettersCount[square.char] += 1;
-                console.log('MULTIPLE THIS', square.char);
-                
-                for (let i = 0; i < myLetters.length; i++) {
-                    if (myLetters[i].char === square.char) {
-                        myLetters.splice(i, 1);
-                    }
-                }
-            } else {
-                lettersCount[square.char] = 1;
-            }
-        }
-    }
-    console.log(lettersCount);
-    // console.log('SELECTED LETTER', selectedLetter);
+// function preventMultiples() {
+// // Ensure only one of each letter outside Query Area
+//     for (let square of myLetters) {
+//         if (!queryArea.contains(square.x, square.y)) {
+//             if (lettersCount[square.char]) {
+//                 lettersCount[square.char] += 1;
+//                 console.log('MULTIPLE THIS', square.char);
+//             } else {
+//                 lettersCount[square.char] = 1;
+//             }
+//         }
+//     }
+//     console.log('THIS IS LETTERSCOUNT', lettersCount);
+//     // console.log('SELECTED LETTER', selectedLetter);
 
-    // let countValues = Object.values(lettersCount);
-    // let multiples = [];
-    // while (countValues.some(value => value > 1 ) ) {
-    //     for (let key in lettersCount) {
-    //         if (lettersCount[key] > 1) {
-    //             console.log('I need to splice!!!');
-    //             multiples.push(key);
-    //         }
-    //     }
-    // }
-    // console.log('I NEED TO SPLICE THESE', multiples);
-    // for (let i = 0; i < myLetters.length; i++) {
-    //     let currentLetter = myLetters[i];
-    //     if (currentLetter.char === key) {
-    //         let removed = myLetters.splice(i, 1);
-    //         console.log('I spliced this Letter Obj:', removed);
-    //         break;
-        }
+//     // let countValues = Object.values(lettersCount);
+//     // let multiples = [];
+//     // while (countValues.some(value => value > 1 ) ) {
+//     //     for (let key in lettersCount) {
+//     //         if (lettersCount[key] > 1) {
+//     //             console.log('I need to splice!!!');
+//     //             multiples.push(key);
+//     //         }
+//     //     }
+//     // }
+//     // console.log('I NEED TO SPLICE THESE', multiples);
+//     // for (let i = 0; i < myLetters.length; i++) {
+//     //     let currentLetter = myLetters[i];
+//     //     if (currentLetter.char === key) {
+//     //         let removed = myLetters.splice(i, 1);
+//     //         console.log('I spliced this Letter Obj:', removed);
+//     //         break;
+// }
     
-
-
 
 
 function addCanvasEventListeners(canvas) {
@@ -198,20 +158,29 @@ function randomY (sect) {
     return y;
 }
 
-
 function mouseDown (event) {
     event.preventDefault();
     console.log(event);
     
     startX = parseInt(event.offsetX);
     startY = parseInt(event.offsetY);
+    selectLetter(startX, startY);
+   
+    isDragging = true;
+            
+    console.log(selectedLetter.char);
+}
+
+function selectLetter (x,y) {
+    startX = x;
+    startY = y;
 
     for (let i = 0; i < myLetters.length; i++) {
         let letterObj = myLetters[i];
         if (letterObj.contains(startX, startY)) {
-            currentLetterIdx = i;
-            isDragging = true;
-            bringToFront();
+            selectedLetter = letterObj;
+            myLetters.splice(i, 1);
+            myLetters.push(selectedLetter);
         }
     }
 }
@@ -223,38 +192,66 @@ function mouseUp (event) {
         event.preventDefault();
         isDragging = false; // Else, we exit dragging mode
     }
-    respawnLetter(ctx, lettersArr);
-    removeMultiples(ctx);
+}
+
+function respawnLetters() {
+
+    // case 1: start out, end in => spawn
+    // case 3: start out, end out => nothing
+    // case 4: start in, end out => delete
+    // case 2: start in, end in => nothing
+    const startedIn = selectedLetter.queried;
+    const endedIn = insideQuery(selectedLetter.x, selectedLetter.y);
+    if (startedIn === false && endedIn === true) {
+        createSingle(ctx, selectedLetter.char);
+    } 
+    if (startedIn === true && endedIn === false) {
+        for (let i = 0; i < myLetters.length; i++) {
+            let currentLetter = myLetters[i];
+            if ( currentLetter.char === selectedLetter.char && currentLetter !== selectedLetter) {
+                myLetters.splice(i,1);
+            }
+        }
+    }
+    selectedLetter.queried = endedIn;
+    drawLetters();
 }
 
 function mouseOut (event) {
-    if (!isDragging) {
+    if (!isDragging) { // No action if we are not currently dragging
         return;
     } else {
         event.preventDefault();
-        isDragging = false;
+        isDragging = false; // Else, we exit dragging mode
     }
+
+    for (let letter of myLetters) {
+        if (queryArea.contains(letter.x, letter.y)) {
+            letter.queried = true;
+        } else {
+            letter.queried = false;
+        }
+    }    
 }
 
 function mouseMove (event) {
     mouseX = parseInt(event.offsetX)
     mouseY = parseInt(event.offsetY)
 
-    if (!isDragging) {
-    } else {
+    if (isDragging) {
         event.preventDefault();
 
         let dx = mouseX - startX;
         let dy = mouseY - startY;
         
-        selectedLetter = myLetters[currentLetterIdx];
         selectedLetter.x += dx;
         selectedLetter.y += dy;
 
         startX = mouseX;
         startY = mouseY;
-    }
 
+        respawnLetters();
+    }
     drawLetters();
 }
 
@@ -288,15 +285,7 @@ function drawLetters() {
         backgroundOnly();
     }
 
-
     for (let letter of myLetters) {
         letter.draw();
     }
-}
-
-function bringToFront() {
-    let temp = myLetters[currentLetterIdx];
-    selectedLetter = temp;
-    myLetters.splice(currentLetterIdx, 1);
-    myLetters.push(temp);
 }
