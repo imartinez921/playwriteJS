@@ -7,7 +7,7 @@ class Letter {
         context = ctx;
         this.x = x;
         this.y = y;
-        this.width = 110;
+        this.width = 120;
         this.height = this.width;
         this.char = char;
         this.font = this.style(this.width/50)
