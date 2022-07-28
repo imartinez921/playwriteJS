@@ -7,7 +7,7 @@ class Letter {
         context = ctx;
         this.x = x;
         this.y = y;
-        this.width = 100;
+        this.width = 110;
         this.height = this.width;
         this.char = char;
         this.font = this.style(this.width/50)
@@ -21,16 +21,21 @@ class Letter {
     draw () {
         // Get a remaining letter in a random font
         this.ctx.font = this.font; 
-        this.ctx.shadowOffsetX = 4;
-        this.ctx.shadowOffsetY = 4;
-        this.ctx.shadowColor = "grey";
+
+        // Draw letter shadow
+        this.ctx.shadowOffsetX = 3;
+        this.ctx.shadowOffsetY = 3;
+        this.ctx.shadowColor = "dark"+this.color;
+        this.ctx.shadowOffsetX = 7;
+        this.ctx.shadowOffsetY = 1;
+        this.ctx.shadowColor = "dark"+this.color;
         
         // Draw letter text
-        
         this.ctx.textAlign = "center";
         this.ctx.fillStyle = this.color;
         this.ctx.fillText(this.char, this.x + this.width/2, this.y + this.height - this.height/5);
 
+        // To use magnet image letters
         // let text = this.char
         // const magLetter = new Image();
         // magLetter.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/" + text + ".png"
@@ -40,7 +45,7 @@ class Letter {
         // }
         // let loadBind = letterLoad.bind(this);
         // magLetter.onload = loadBind;
-        this.ctx.restore();
+        // this.ctx.restore();
     }
 
     style (factor) { // This fn returns a random font for ctx.font, eg. ctx.font = "30px Arial";
@@ -57,9 +62,23 @@ class Letter {
     }
 
     color () {
-        let colors = ["red", "yellow", "orange", "blue", "green", "purple", "black"];
+        let colors = ["blue", "cyan", "red", "orange", 
+            "green", "magenta", "orchid", "green", "turquoise",
+            "slateblue", "khaki", "violet"
+        ];
         return colors[Math.floor((Math.random() * colors.length))];
     }
+
+
+    containsX (x) {
+        return (x >= this.x && 
+            x <= this.x + this.width);
+    }
+
+    containsY (y) {
+        return (y >= this.y &&
+            y <= this.y + this.height);
+        }
 
     contains (x, y) {
         return (x >= this.x && 

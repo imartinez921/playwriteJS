@@ -1,2 +1,15 @@
 // @import "./styles/css-reset.css";
 @import "./styles/main-page.css";
+
+
+@keyframes scatter {
+  0% {
+    top: 0;
+  }
+  50% {
+    top: -10px;
+  }
+  100% {
+    top: 0;
+  }
+}

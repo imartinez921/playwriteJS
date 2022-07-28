@@ -1,23 +1,36 @@
 /* https://pics.clipartpng.com/midle/Kitchen_Set_PNG_Clipart-140.png */
 * {
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     }
 
 :root {
-    --text: #5362F6; /* Blue */
-    --shadow: #E485F8; /* Pink */
-}
+    --text: #ff0000; 
+    --shadow: #001aff; 
+} 
 
 .header {
+    width: 1149;
     text-align: center;
-    background-image: linear-gradient(to left, indigo, blue, green, yellow, orange, red);
-    -webkit-background-clip: text;
-    color: transparent;
-    font: bold 50px comic sans ms, helvetica;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 100px;
+    font-family: comic sans ms, helvetica;
+    background-image: url("/../../../assets/images/loose_leaf_paper.png");
+    background-repeat: none;
+    background-size: 30%;
+    /* background-position: center center; */
 }
 
+body {
+    background-color: antiquewhite;
+    /* background-repeat: repeat-y;
+    background-repeat: repeat-x; */
+}
+
+
 #playful span {
+    padding: 0; 
     color: var(--text);
     text-shadow: 
       6px 6px var(--shadow),
@@ -44,36 +57,33 @@
       0.75px 0.75px var(--shadow),
       0.5px 0.5px var(--shadow),
       0.25px 0.25px var(--shadow);
+      position: relative;
+      animation: scatter 1.75s infinite;
+  }
+
+  #playful span:nth-child(2n) {
+    color: #ED625C;
+    text-shadow: textShadow(0.25, 6, #F2A063);
+    animation-delay: 0.3s;
   }
   
-  #playful span:nth-child(2n) {
-    --text: #ED625C;
-    --shadow: #F2A063;
+  #playful span:nth-child(3n) {
+    color: #ffd502;
+    text-shadow: textShadow(0.25, 6, #6EC0A9);
+    animation-delay: 0.15s;
+  }
+  
+  #playful span:nth-child(5n) {
+    color: #31cacf;
+    text-shadow: textShadow(0.25, 6, #E485F8);
+    animation-delay: 0.4s;
+  }
+  
+  #playful span:nth-child(7n), #playful span:nth-child(11n) {
+    color: #f57f2b;
+    text-shadow: textShadow(0.25, 6, #FF5555);
+    animation-delay: 0.25s;
   }
 
-.spacer {
-    margin: auto;
-    height: 10px;
-}
 
-body {
-    margin: auto;
-    padding: 0;
-    background-image: url("/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/kitchen-background.png");
-    /* background-repeat: repeat-y;
-    background-repeat: repeat-x; */
-}
 
-#canvas, #mycanvas {
-    margin: auto;
-    /* // height: 25%; */
-    /* display: none; */
-}
-
-h1 {
-    margin: auto;
-}
-
-footer {
-    margin: auto;
-}

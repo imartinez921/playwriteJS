@@ -1,5 +1,5 @@
 import Section from './scripts/section';
-import Letter from './scripts/letter';  
+import Letter from './scripts/letter';
 
 let background = null;
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
@@ -43,12 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initialize () {
     background = new Image(); 
-    background.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/fridge_door.png"; // 1149x860
+    background.src = "/../../../assets/images/fridge_door.png"; // 1149x860
     background.onload = function() {  // Make sure the image is loaded first otherwise nothing will draw.
         myCanvas.width = 1149;
         myCanvas.height = 860;
         ctx.drawImage(background,0,0,background.width,background.height,0,0,1149,860);
-
+        
         get_offset();
         spawn(ctx);
     }
@@ -78,21 +78,56 @@ function get_offset() {
 function createLetters (ctx){
     for (let i = 0; i < alphabet.length; i++){ 
         let char = alphabet[i];
+
         let spawnArea = (Math.round(Math.random()) === 0) ? letters1 : letters2;
 
-        const x = randomX(spawnArea)+(50 * Math.random());          
-        const y = randomY(spawnArea)+(50 * Math.random());          
-
+        const x = randomX(spawnArea)-(100 * Math.random());          
+        const y = randomY(spawnArea)-(100 * Math.random()); 
         const letter = new Letter (ctx, x, y, char);
+        // let pos = randomPosition(); // returns [x,y] pair
+        // const letter = new Letter (ctx, pos[0], pos[1], char);
+        
         myLetters.push(letter);
     }
 }
 
+// function randomPosition() {
+//     let spawnArea = (Math.round(Math.random()) === 0) ? letters1 : letters2;
+
+//     let x = randomX(spawnArea)-(100 * Math.random());          
+
+    // Trying not to have letters overlap but there wasn't enough space for this;
+    // Need to refactor to be close but not on top of each other
+    // let uniqueX = false;
+    // while (!uniqueX) {
+    //     uniqueX = true;
+    //     for (let letterX of myLetters) {
+    //         if (letterX.containsX) {
+    //             x = randomX(spawnArea)-(100 * Math.random());
+    //             uniqueX = false;
+    //         }
+    //     }
+    // }
+
+    // let y = randomY(spawnArea)-(100 * Math.random()); 
+    // let uniqueY = false;
+    // while (!uniqueY) {
+    //     uniqueY = true;
+    //     for (let letterY of myLetters) {
+    //         if (letterY.containsY) {
+    //             y = randomY(spawnArea)-(100 * Math.random());
+    //             uniqueY = false;
+    //         }
+    //     }
+    // }
+//     return [x,y];
+// }
+
 function createSingle(ctx, char) {
     let spawnArea = (Math.round(Math.random()) === 0) ? letters1 : letters2;
             
-    const x = randomX(spawnArea)+(50 * Math.random());          
-    const y = randomY(spawnArea)+(50 * Math.random()); 
+    const x = randomX(spawnArea)-(100 * Math.random());          
+    const y = randomY(spawnArea)-(100 * Math.random()); 
     const letter = new Letter (ctx, x, y, char);
 
     myLetters.push(letter);
@@ -253,3 +288,10 @@ function drawLetters() {
         letter.draw();
     }
 }
+
+
+// function animate() {
+//     ctx.clearRect(0,0,myCanvas.width, myCanvas.height);
+//     drawLetters();
+//     window.requestAnimationFrame(animate);
+// }
