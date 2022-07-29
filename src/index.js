@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initialize () {
     background = new Image(); 
-    background.src = "/../../../assets/images/fridge_door.png"; // 1149x860
+    background.src = "/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/fridge_door.png"; // 1149x860
     background.onload = function() {  // Make sure the image is loaded first otherwise nothing will draw.
         myCanvas.width = 1149;
         myCanvas.height = 860;

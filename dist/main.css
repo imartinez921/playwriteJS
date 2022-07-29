@@ -30,7 +30,7 @@
     border-left: 10px solid #C5C4C2;
     border-right: 10px solid #C5C4C2;
     border-bottom: 10px solid #C5C4C2;
-    background-image: url("/../../../assets/images/loose_leaf_paper.png");
+    background-image: url("/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/loose_leaf_paper.png");
     background-repeat: none;
     background-size: 40%;
     /* background-position: center center; */
@@ -47,12 +47,20 @@ body {
     background-repeat: repeat-x; */
 }
 
-.social_media_links {
-  position: fixed;
-  top: 0;
+#linkedin img {
+  position: absolute;
+  top: 80px;
   left: 0;
-  width: 300px;
-  border: 3px solid black;
+  width: 100px;
+  height: 100px;
+}
+
+#github img {
+  position: absolute;
+  top: 180px;
+  left: 0;
+  width: 100px;
+  height: 100px;
 }
 
 .modal-button {
