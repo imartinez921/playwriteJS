@@ -27,7 +27,7 @@
     border-left: 10px solid #C5C4C2;
     border-right: 10px solid #C5C4C2;
     border-bottom: 10px solid #C5C4C2;
-    background-image: url("/Users/EtaCarinaeDua/Dropbox/aabootcamp/theCoolerDictionary_JS/assets/images/loose_leaf_paper.png");
+    background-image: url("../assets/images/loose_leaf_paper.png");
     background-repeat: none;
     background-size: 40%;
     /* background-position: center center; */
@@ -38,7 +38,7 @@ body {
     align-items: center; 
     flex-direction: column;
     margin: 0 auto;
-    background-image: url("/../../../assets/images/kitchentile-light.jpeg");
+    /* background-image: url("/../../../assets/images/kitchentile-light.jpeg"); */
     background-color: antiquewhite;
     /* background-repeat: repeat-y;
     background-repeat: repeat-x; */
