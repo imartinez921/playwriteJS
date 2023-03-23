@@ -23,19 +23,15 @@ In the Cooler Dictionary, users will be able to:
 
 - rearrange magnetic letters by dragging them across the surface of the fridge to create English words
 
-- pull on the fridge handle to search for that specific query in the Cooler Dictionary, returning definitions, synonyms, antonyms, etc.
 
-- see how their queries change the view of the fridge door (eg. add an image of each query as a postcard, have a whiteboard with history of previous queries crossed out)
+
+In the future, this project will include:
+
+- pull functionality for the fridge handle to search for that specific query in the Cooler Dictionary, returning definitions, synonyms, antonyms, etc.
+
+- dynamic fridge door view (displayed history of previous queries crossed out)
 
 - click a magnet saying "Feeling random?" which will randomly generate a random word query and re-arrange the letters
-
-  
-
-In addition, this project will include:
-
-- instructions that show per point-and-click object upon hover
-
-- light functionality when the fridge door is opened or closed
 
 - eraser for Whiteboard that can be used to erase and rearrange letters to a previous word
 
@@ -64,7 +60,7 @@ Freezer: assets/images/inside-freezer.avif
 
 - [CSS Transition MDN Docs](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions)
 
-- [Typeface.js](https://owlbot.info/) Library for font functionality??
+- [Typeface.js](https://owlbot.info/) Library for font functionality
 
 - Dictionary APIs
 
