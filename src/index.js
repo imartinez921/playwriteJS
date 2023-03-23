@@ -96,7 +96,7 @@ function createLetters (ctx){
 
 //     let x = randomX(spawnArea)-(100 * Math.random());          
 
-    // Trying not to have letters overlap but there wasn't enough space for this;
+    // Trying not to have letters overlap but there wasn't enough area available  for this;
     // Need to refactor to be close but not on top of each other
     // let uniqueX = false;
     // while (!uniqueX) {
@@ -165,7 +165,7 @@ function mouseDown (event) {
     startY = parseInt(event.offsetY);
     selectLetter(startX, startY);
    
-    isDragging = true;
+isDragging = true;
             
     console.log(selectedLetter.char);
 }
