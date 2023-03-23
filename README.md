@@ -11,13 +11,13 @@ Drag and drop the magnetic letters to the query area that glows in the middle of
 *** Title Credit: Kyle Ginzburg
 
 
-### Background
+## Background
 
 Ever wanted walking past your fridge to stimulate your brain instead of your stomach? The Cooler Dictionary was created with that goal in mind. Suitable for both eaters and readers, the Cooler Dictionary allows the user to rearrange magnetic letters on the fridge to spell out a word.... What do you think happens when you open this kind of fridge? Trust me when I say it's more awesome than your typical heavy, dust-ridden dictionary.
 
   
 
-### Functionality & MVPs
+## Functionality & MVPs
 
 In the Cooler Dictionary, users will be able to:
 
@@ -29,7 +29,7 @@ In the future, this project will include:
 
 - pull functionality for the fridge handle to search for that specific query in the Cooler Dictionary, returning definitions, synonyms, antonyms, etc.
 
-- dynamic fridge door view (displayed history of previous queries crossed out)
+- dynamic fridge door view (area displaying history of previous queries)
 
 - click a magnet saying "Feeling random?" which will randomly generate a random word query and re-arrange the letters
 
@@ -68,7 +68,4 @@ Freezer: assets/images/inside-freezer.avif
 
 - [Free Dictionary API](https://dictionaryapi.dev/)
 
-- [WordsAPI](https://www.wordsapi.com/docs/)
-
-- Has random word generator functionality
-- [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API)
+- [WordsAPI](https://www.wordsapi.com/docs/) for random word generator functionality
